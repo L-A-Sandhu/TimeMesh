@@ -12,6 +12,8 @@ jobs:
           python-version: "3.12"
       - name: Install Poetry
         run: pip install poetry
+      - name: Install Dependencies  # NEW STEP
+        run: poetry install --no-dev
       - name: Build and Publish
         env:
           PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}

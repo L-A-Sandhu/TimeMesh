@@ -8,11 +8,10 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: "3.12"
-      - name: Install Poetry
-        run: pip install poetry
-      - name: Install dependencies
-        run: poetry install
-      - name: Run tests
-        run: poetry run pytest -v --cov=stloader --cov-report=xml
+      - run: pip install poetry
+      - run: poetry install --with dev
+      - run: poetry run black . --check        # Linting (optional)
+      - run: poetry run flake8 timemesh        # Code style (optional)
+      - run: poetry run pytest -v --cov=timemesh --cov-fail-under=80
       - name: Upload coverage
         uses: codecov/codecov-action@v3
