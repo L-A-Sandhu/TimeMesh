@@ -16,7 +16,13 @@ scikit-learn = "^1.6.1"
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.5"
 pytest-cov = "^6.0.0"
+black = "^24.4.0"  # Added black here
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+# Optional: Add black configuration
+[tool.black]
+line-length = 120
+target-version = ['py312']
