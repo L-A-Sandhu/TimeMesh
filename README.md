@@ -1,8 +1,6 @@
-# STLoader
+# TimeMesh
 
-
-
-A Python library for creating input/output windows from time-series CSV data.
+A Python library for temporal and spatio-temporal data preparation, feature engineering, and windowing.
 
 ## Installation
 ```bash

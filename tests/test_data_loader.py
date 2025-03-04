@@ -1,6 +1,6 @@
 import pytest
 import numpy as np
-from stloader.data_loader import DataLoader
+from timemesh.data_loader import DataLoader
 import pandas as pd
 from pathlib import Path
 

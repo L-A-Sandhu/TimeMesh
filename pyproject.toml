@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "stloader"
+name = "timemesh"
 version = "0.1.0"
-description = "A minimal time-series windowing library for CSV data"
-authors = ["L-A-Sandhu"]
+description = "A comprehensive toolkit for temporal and spatio-temporal data preparation."
+authors = ["L-A-Sandhu <laeeq.aslam.100@gmail.com>"]
 license = "MIT"
 readme = "README.md"
 
