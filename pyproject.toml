@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "stloader"
+version = "0.1.0"
+description = "A Python library for spatio-temporal data loading, preprocessing, and feature engineering."
+authors = ["L-A-Sandhu"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pandas = "^2.2.3"
+xarray = "^2025.1.2"
+scikit-learn = "^1.6.1"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.5"
+pytest-cov = "^6.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
