@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "stloader"
 version = "0.1.0"
-description = "A Python library for spatio-temporal data loading, preprocessing, and feature engineering."
+description = "A minimal time-series windowing library for CSV data"
 authors = ["L-A-Sandhu"]
 license = "MIT"
 readme = "README.md"

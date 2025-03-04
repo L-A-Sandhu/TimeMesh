@@ -1,6 +1,12 @@
 # STLoader
 
-Minimal time-series windowing library.
+
+
+A Python library for creating input/output windows from time-series CSV data.
+
+## Installation
+```bash
+pip install stloader
 
 ## Installation
 ```bash

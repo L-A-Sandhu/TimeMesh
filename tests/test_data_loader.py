@@ -22,3 +22,13 @@ def test_default_loader(tmp_path):
 def test_custom_cols_and_step():
     # Test input/output column selection and step size
     pass  # You'll implement this later
+
+def test_insufficient_rows():
+    data = {"A": [1, 2], "B": [3, 4]}
+    df = pd.DataFrame(data)
+    csv_path = "test.csv"
+    df.to_csv(csv_path, index=False)
+    
+    loader = DataLoader(T=2, H=1)
+    X, Y = loader.load_csv(csv_path)
+    assert len(X) == 0  # No examples possible
