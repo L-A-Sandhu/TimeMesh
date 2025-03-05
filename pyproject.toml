@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "timemesh"
-version = "0.1.0"
+version = "0.2.0"
 description = "Spatio-temporal data preparation toolkit"
 authors = ["Laeeq <Laeeq.aslam.100@gmail.com>"]
 readme = "README.md"
