@@ -4,26 +4,46 @@ on: [push, pull_request]
 jobs:
   lint-and-test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+        
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v4
+      
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
-      
+          python-version: ${{ matrix.python-version }}
+          
       - name: Install Poetry
-        run: pip install poetry
-      
+        run: pip install poetry==1.8.2
+        
+      - name: Validate pyproject.toml
+        run: poetry check
+        
       - name: Install dependencies
         run: poetry install --with dev --no-interaction
-      
+        
       - name: Check formatting
         run: poetry run black --check .
-      
+        
       - name: Lint with flake8
         run: poetry run flake8 timemesh tests
-      
+        
+      - name: Static type checking
+        run: poetry run mypy timemesh
+        
       - name: Run tests
-        run: poetry run pytest -v --cov=timemesh --cov-fail-under=80
-      
+        run: |
+          poetry run pytest -v \
+          --cov=timemesh \
+          --cov-report=xml \
+          --cov-fail-under=80
+          
       - name: Upload coverage
         uses: codecov/codecov-action@v3
+
+      - name: Check coverage
+        run: |
+           poetry run pytest --cov=timemesh --cov-fail-under=80

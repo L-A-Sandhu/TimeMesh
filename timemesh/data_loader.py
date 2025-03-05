@@ -5,6 +5,9 @@ from .preprocessing import Normalizer
 
 class DataLoader:
     def __init__(self, T=1, H=1, input_cols=None, output_cols=None, step=None, norm=None):
+        valid_norm_methods = [None, "MM", "Z"]
+        if norm not in valid_norm_methods:
+            raise ValueError(f"Invalid normalization method. Allowed: {valid_norm_methods}")
         self.T = T
         self.H = H
         self.step = step if step is not None else T

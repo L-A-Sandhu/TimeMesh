@@ -56,6 +56,11 @@ class Normalizer:
 
     @staticmethod
     def denormalize(data: np.ndarray, params: dict, method: str, feature_order: list):
+        for col in feature_order:
+            if method == "MM" and ("min" not in params[col] or "max" not in params[col]):
+                raise ValueError(f"Missing min/max parameters for {col}")
+            if method == "Z" and ("mean" not in params[col] or "std" not in params[col]):
+                raise ValueError(f"Missing mean/std parameters for {col}")
         """Denormalize with explicit feature order"""
         data = data.copy()
         original_shape = data.shape

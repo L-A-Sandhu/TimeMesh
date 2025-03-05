@@ -2,28 +2,44 @@
 name = "timemesh"
 version = "0.1.0"
 description = "Spatio-temporal data preparation toolkit"
-authors = ["Your Name <you@example.com>"]
+authors = ["Laeeq <Laeeq.aslam.100@gmail.com>"]
 readme = "README.md"
 license = "MIT"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+keywords = ["time-series", "machine learning", "data preprocessing"]
+homepage = "https://github.com/yourusername/timemesh"
+repository = "https://github.com/yourusername/timemesh"
+documentation = "https://github.com/yourusername/timemesh/blob/main/README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
-pandas = "^2.2.3"
-numpy = "^1.24.0"
-xarray = "^2025.1.2"
-scikit-learn = "^1.6.1"
+python = "^3.12"  # Support wider Python versions
+pandas = ">=2.0.3"
+numpy = ">=1.21.0"
+xarray = ">=2023.1.0"  # Fixed version
+scikit-learn = ">=1.0.0"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^8.3.5"
+pytest = "^8.0.0"
 pytest-cov = "^6.0.0"
-black = "^24.4.0"  # Added black here
-flake8 = "^7.1.2"
+black = "^24.4.0"
+flake8 = "^7.0.0"
+mypy = "^1.10.0"
+backports-tarfile = "^1.2.0"
+
+[tool.poetry.scripts]
+timemesh = "timemesh.cli:main"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
-# Optional: Add black configuration
 [tool.black]
 line-length = 120
-target-version = ['py312']
+target-version = ['py38']
+
+[tool.isort]
+profile = "black"
