@@ -1,17 +1,29 @@
 name: CI
 on: [push, pull_request]
+
 jobs:
-  test:
+  lint-and-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v4
         with:
           python-version: "3.12"
-      - run: pip install poetry
-      - run: poetry install --with dev
-      - run: poetry run black . --check        # Linting (optional)
-      - run: poetry run flake8 timemesh        # Code style (optional)
-      - run: poetry run pytest -v --cov=timemesh --cov-fail-under=80
+      
+      - name: Install Poetry
+        run: pip install poetry
+      
+      - name: Install dependencies
+        run: poetry install --with dev --no-interaction
+      
+      - name: Check formatting
+        run: poetry run black --check .
+      
+      - name: Lint with flake8
+        run: poetry run flake8 timemesh tests
+      
+      - name: Run tests
+        run: poetry run pytest -v --cov=timemesh --cov-fail-under=80
+      
       - name: Upload coverage
         uses: codecov/codecov-action@v3
