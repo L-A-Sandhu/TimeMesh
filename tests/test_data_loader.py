@@ -1,7 +1,6 @@
 import pytest
 import numpy as np
 from timemesh import DataLoader
-import pytest
 
 
 def test_dataloader_initialization():
