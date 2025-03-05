@@ -3,6 +3,7 @@ import pytest
 import pandas as pd
 import numpy as np
 
+
 @pytest.fixture
 def sample_data():
     """Generate synthetic test data"""
@@ -24,12 +25,11 @@ def sample_data():
     }
     return pd.DataFrame(data)
 
+
 @pytest.fixture
 def input_cols():
-    return [
-        "C_WD50M", "C_WS50M", "C_PS", "C_T2M", "C_QV2M",
-        "N_WD50M", "N_WS50M", "N_PS", "N_T2M", "N_QV2M"
-    ]
+    return ["C_WD50M", "C_WS50M", "C_PS", "C_T2M", "C_QV2M", "N_WD50M", "N_WS50M", "N_PS", "N_T2M", "N_QV2M"]
+
 
 @pytest.fixture
 def output_cols():
