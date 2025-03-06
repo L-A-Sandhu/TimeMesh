@@ -42,9 +42,17 @@ def test_mixed_normalization(sample_data, input_cols, output_cols, tmp_path):
     assert "min" in inp_params[input_cols[0]]
     assert "max" in inp_params[input_cols[0]]
 
+
 # --- Test Data Split Without Normalization ---
 def test_data_split_without_normalization(sample_data, input_cols, output_cols, tmp_path):
-    loader = DataLoader(T=24, H=6, input_cols=input_cols, output_cols=output_cols, norm=None, ratio={"train": 60, "test": 20, "valid": 15})
+    loader = DataLoader(
+        T=24,
+        H=6,
+        input_cols=input_cols,
+        output_cols=output_cols,
+        norm=None,
+        ratio={"train": 60, "test": 20, "valid": 15},
+    )
 
     test_path = tmp_path / "test_data.csv"
     sample_data.to_csv(test_path, index=False)
@@ -68,7 +76,14 @@ def test_data_split_without_normalization(sample_data, input_cols, output_cols, 
 
 # --- Test Data Split With Normalization ---
 def test_data_split_with_normalization(sample_data, input_cols, output_cols, tmp_path):
-    loader = DataLoader(T=24, H=6, input_cols=input_cols, output_cols=output_cols, norm="Z", ratio={"train": 60, "test": 20, "valid": 15})
+    loader = DataLoader(
+        T=24,
+        H=6,
+        input_cols=input_cols,
+        output_cols=output_cols,
+        norm="Z",
+        ratio={"train": 60, "test": 20, "valid": 15},
+    )
 
     test_path = tmp_path / "test_data.csv"
     sample_data.to_csv(test_path, index=False)
