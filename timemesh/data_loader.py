@@ -3,10 +3,6 @@ import numpy as np
 from .preprocessing import Normalizer
 from .data_split import DataSplitter
 
-import pandas as pd
-import numpy as np
-from .preprocessing import Normalizer
-from .data_split import DataSplitter
 
 
 class DataLoader:
