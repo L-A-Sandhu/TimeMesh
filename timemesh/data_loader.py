@@ -4,7 +4,6 @@ from .preprocessing import Normalizer
 from .data_split import DataSplitter
 
 
-
 class DataLoader:
     def __init__(self, ratio=None, T=1, H=1, input_cols=None, output_cols=None, step=None, norm=None):
         valid_norm_methods = [None, "MM", "Z"]
