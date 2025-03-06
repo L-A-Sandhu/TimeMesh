@@ -1,6 +1,6 @@
 # Timemesh 🕰️
 
-[![Python Version](https://img.shields.io/badge/python-3.12%2B-blue)](https://www.python.org/)
+[![Python Version](https://img.shields.io/badge/python-3.9%2B-blue)](https://www.python.org/)
 [![PyPI Version](https://img.shields.io/pypi/v/timemesh)](https://pypi.org/project/timemesh/)
 
 A Python library for efficient time series data preprocessing and windowing for machine learning.
@@ -44,16 +44,50 @@ X, Y, input_params, output_params = loader.load_csv("data.csv")
 | **output_cols**| Target features for prediction      | None(All Will be output        | List of column names  |
 | **norm**      | Normalization method                 | `None`(No Normalization)  | `"MM"`, `"Z"`         |
 | **steps**     | Step size between windows            | `None`(Non overlapping)  | Any positive integer  |
-| **ratio**     | Train, Test and Validation Split      | `None`(No Split Just get X and Y or Normalized if normalizing)  | Any positive integer  |
+| **ratio**     | Train, Test and Validation Split      | `None`(No Split Just get X and Y)  | Any positive integer  |
 
 
+### Example Usage Code 
 
-## Example Code 
 Download Example dataset 
 ```
 wget https://github.com/L-A-Sandhu/TimeMesh/blob/main/examples/data.csv
 ```
-#### Example Usage Code 
+
+#### Complete Functional Example Load , Normalize and Split data
+```
+# =================================================================
+# Complete Functional Example Load , Normalize and Split data
+# =================================================================
+df = pd.read_csv("data.csv")
+input_cols = [
+    "C_WD50M", "C_WS50M", "C_PS", "C_T2M", "C_QV2M",
+    "N_WD50M", "N_WS50M", "N_PS", "N_T2M", "N_QV2M",
+    "S_WD50M", "S_WS50M", "S_PS", "S_T2M", "S_QV2M",
+    "E_WD50M", "E_WS50M", "E_PS", "E_T2M", "E_QV2M", 
+    "W_WD50M", "W_WS50M", "W_PS", "W_T2M", "W_QV2M", 
+    "NE_WD50M", "NE_WS50M", "NE_PS", "NE_T2M", "NE_QV2M",
+    "NW_WD50M", "NW_WS50M", "NW_PS", "NW_T2M", "NW_QV2M",
+    "SE_WD50M", "SE_WS50M", "SE_PS", "SE_T2M", "SE_QV2M",
+    "SW_WD50M", "SW_WS50M", "SW_PS", "SW_T2M", "SW_QV2M"
+]
+
+output_cols = ["C_WS50M"]
+
+print("\n--- Case 2: With Min-Max Normalization ---")
+loader_norm = tm.DataLoader(T=24, H=6, input_cols=input_cols, output_cols=output_cols, norm="Z",step=12, ratio={'train': 70, 'test': 15, 'valid': 15})
+X_train, Y_train, X_test, Y_test, X_valid, Y_valid,  input_params, output_params = loader_norm.load_csv("data.csv")
+
+print("\nLoaded normalized data:")
+print(f"Shape of X_train: {X_train.shape}")
+print(f"Shape of Y_train: {Y_train.shape}")
+print(f"Shape of X_test: {X_test.shape}")
+print(f"Shape of Y_test: {Y_test.shape}")
+print(f"Shape of X_valid: {X_valid.shape}")
+print(f"Shape of Y_valid: {Y_valid.shape}")
+
+```
+#### Case 1: Without Normalization (norm=None)
 ```
 import timemesh as tm
 import numpy as np
@@ -78,7 +112,9 @@ print(f"Shape of X_raw: {X_raw.shape}")
 print(f"Shape of Y_raw: {Y_raw.shape}")
 print(f"First sample of X_raw:\n{X_raw[0]}")
 print(f"First sample of Y_raw:\n{Y_raw[0]}")
-
+```
+#### Case 2: With Min-Max Normalization
+```
 # =================================================================
 # Case 2: With Min-Max Normalization
 # =================================================================
@@ -93,7 +129,9 @@ print(f"Normalization parameters (input):\n{input_params}")
 print(f"Normalization parameters (output):\n{output_params}")
 print(f"First sample of X_norm:\n{X_norm[0]}")
 print(f"First sample of Y_norm:\n{Y_norm[0]}")
-
+```
+#### Case 2: With Min-Max Normalization
+```
 # =================================================================
 # Denormalize the normalized data
 # =================================================================
@@ -109,6 +147,9 @@ print(f"Shape of X_denorm: {X_denorm.shape}")
 print(f"Shape of Y_denorm: {Y_denorm.shape}")
 print(f"First sample of X_denorm:\n{X_denorm[0]}")
 print(f"First sample of Y_denorm:\n{Y_denorm[0]}")
+```
+#### Case 2: With Min-Max Normalization
+```
 
 # =================================================================
 # Verification Checks
@@ -139,9 +180,11 @@ def verify_results():
     print(f"Normalized:      {X_norm[sample_idx, time_idx, feature_idx]:.2f}")
 
 verify_results()
-
+```
+#### Case 3: Test with norm=None (No normalization, No Split)
+```
 # =================================================================
-# Case 3: Test with norm=None (No normalization)
+# Case 3: Test with norm=None (No normalization, No Split)
 # =================================================================
 def test_no_normalization():
     print("\n--- Case 3: Test with No Normalization ---")
@@ -155,7 +198,9 @@ def test_no_normalization():
     print("\nTest Passed: No normalization returns raw data successfully.")
 
 test_no_normalization()
-
+```
+#### Case 4: With Z-Score Normalization
+```
 # =================================================================
 # Case 4: With Z-Score Normalization
 # =================================================================
@@ -170,7 +215,9 @@ print(f"Z-score Normalization parameters (input):\n{input_params_z}")
 print(f"Z-score Normalization parameters (output):\n{output_params_z}")
 print(f"First sample of X_norm_z:\n{X_norm_z[0]}")
 print(f"First sample of Y_norm_z:\n{Y_norm_z[0]}")
-
+```
+#### Denormalize the Z-normalized data
+```
 # =================================================================
 # Denormalize the Z-normalized data
 # =================================================================
@@ -183,7 +230,9 @@ print(f"Shape of X_denorm_z: {X_denorm_z.shape}")
 print(f"Shape of Y_denorm_z: {Y_denorm_z.shape}")
 print(f"First sample of X_denorm_z:\n{X_denorm_z[0]}")
 print(f"First sample of Y_denorm_z:\n{Y_denorm_z[0]}")
-
+```
+####  Z-Score Specific Verification
+```
 # =================================================================
 # Z-Score Specific Verification
 # =================================================================
@@ -222,6 +271,11 @@ def verify_zscore_results():
     )
 
 verify_zscore_results()
+
+
+
+
+
 
 # =================================================================
 # Summary
