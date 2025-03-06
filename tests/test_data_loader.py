@@ -1,6 +1,7 @@
 import pytest
 import numpy as np
 from timemesh import DataLoader
+import pandas as pd
 
 
 def test_dataloader_initialization():
@@ -40,3 +41,54 @@ def test_mixed_normalization(sample_data, input_cols, output_cols, tmp_path):
     X, Y, inp_params, out_params = loader.load_csv(str(test_path))
     assert "min" in inp_params[input_cols[0]]
     assert "max" in inp_params[input_cols[0]]
+
+# --- Test Data Split Without Normalization ---
+def test_data_split_without_normalization(sample_data, input_cols, output_cols, tmp_path):
+    loader = DataLoader(T=24, H=6, input_cols=input_cols, output_cols=output_cols, norm=None, ratio={"train": 60, "test": 20, "valid": 15})
+
+    test_path = tmp_path / "test_data.csv"
+    sample_data.to_csv(test_path, index=False)
+
+    X_train, Y_train, X_test, Y_test, X_valid, Y_valid = loader.load_csv(str(test_path))
+
+    # Check that the data is split correctly
+    total_samples = len(sample_data) // loader.T
+    expected_train_size = total_samples * 60 // 100
+    expected_test_size = total_samples * 20 // 100
+    # Calculate the remaining samples for validation
+    expected_valid_size = total_samples - expected_train_size - expected_test_size
+
+    assert len(X_train) == expected_train_size
+    assert len(Y_train) == expected_train_size
+    assert len(X_test) == expected_test_size
+    assert len(Y_test) == expected_test_size
+    assert len(X_valid) == expected_valid_size
+    assert len(Y_valid) == expected_valid_size
+
+
+# --- Test Data Split With Normalization ---
+def test_data_split_with_normalization(sample_data, input_cols, output_cols, tmp_path):
+    loader = DataLoader(T=24, H=6, input_cols=input_cols, output_cols=output_cols, norm="Z", ratio={"train": 60, "test": 20, "valid": 15})
+
+    test_path = tmp_path / "test_data.csv"
+    sample_data.to_csv(test_path, index=False)
+
+    X_train, Y_train, X_test, Y_test, X_valid, Y_valid, input_params, output_params = loader.load_csv(str(test_path))
+
+    # Check that normalization has been applied (input_params should exist)
+    assert "mean" in input_params[input_cols[0]]
+    assert "std" in input_params[input_cols[0]]
+
+    # Check if data was split correctly
+    total_samples = len(sample_data) // loader.T
+    expected_train_size = total_samples * 60 // 100
+    expected_test_size = total_samples * 20 // 100
+    # Calculate the remaining samples for validation
+    expected_valid_size = total_samples - expected_train_size - expected_test_size
+
+    assert len(X_train) == expected_train_size
+    assert len(Y_train) == expected_train_size
+    assert len(X_test) == expected_test_size
+    assert len(Y_test) == expected_test_size
+    assert len(X_valid) == expected_valid_size
+    assert len(Y_valid) == expected_valid_size

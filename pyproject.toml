@@ -16,7 +16,7 @@ repository = "https://github.com/L-A-Sandhu/timemesh"
 documentation = "https://github.com/L-A-Sandhu/timemesh/blob/main/README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.9"
 pandas = ">=2.0.3"
 numpy = ">=1.21.0"
 xarray = ">=2023.1.0"
@@ -30,6 +30,7 @@ black = { version = "^24.4.0", extras = ["jupyter"] }
 flake8 = "^7.0.0"
 mypy = "^1.10.0"
 backports-tarfile = "^1.2.0"
+pytest-mock = "^3.14.0"
 
 
 [tool.poetry.scripts]
@@ -41,6 +42,6 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.black]
 line-length = 120
-target-version = ['py312']
+target-version = ['py39']
 
 [tool.isort]
