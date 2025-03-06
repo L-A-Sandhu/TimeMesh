@@ -2,6 +2,7 @@ import pytest
 import numpy as np
 from timemesh.data_split import DataSplitter  # Adjust path as needed
 
+
 def test_data_split():
     """Test if DataSplitter correctly splits the dataset based on given ratios."""
     # Example dataset
@@ -36,6 +37,7 @@ def test_data_split():
     assert np.array_equal(np.sort(combined_X), np.sort(X))
     assert np.array_equal(np.sort(combined_Y), np.sort(Y))
 
+
 def test_ratio_sum_exceeds_100():
     """Ensure an error is raised when sum of ratios exceeds 100%."""
     X = np.array([1, 2, 3, 4, 5])
@@ -44,6 +46,7 @@ def test_ratio_sum_exceeds_100():
     with pytest.raises(ValueError, match="The sum of train, test, and valid ratios cannot exceed 100%"):
         ratios = {"train": 50, "test": 30, "valid": 30}  # Sum = 110%
         DataSplitter(X, Y, ratios)
+
 
 def test_warning_on_less_than_100(monkeypatch, capsys):
     """Ensure a warning is printed when the sum of ratios is less than 100%."""
@@ -59,6 +62,6 @@ def test_warning_on_less_than_100(monkeypatch, capsys):
 
     # Capture printed output
     captured = capsys.readouterr()
-    
+
     # Ensure the warning message appears
     assert "Warning: The sum of the ratios is less than 100%. The remaining will be unallocated." in captured.out

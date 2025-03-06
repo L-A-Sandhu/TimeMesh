@@ -1,19 +1,15 @@
 import pandas as pd
 import numpy as np
 from .preprocessing import Normalizer
-from . data_split import DataSplitter
-
-import pandas as pd
-import numpy as np
-from .preprocessing import Normalizer
 from .data_split import DataSplitter
+
 
 class DataLoader:
     def __init__(self, ratio=None, T=1, H=1, input_cols=None, output_cols=None, step=None, norm=None):
         valid_norm_methods = [None, "MM", "Z"]
         if norm not in valid_norm_methods:
             raise ValueError(f"Invalid normalization method. Allowed: {valid_norm_methods}")
-        
+
         self.T = T
         self.H = H
         self.step = step if step is not None else T
@@ -34,7 +30,7 @@ class DataLoader:
         # Handle column defaults
         if self.input_cols is None:
             self.input_cols = list(df.columns)
-        
+
         if self.output_cols is None:
             self.output_cols = [self.input_cols[-1]]  # Default output to the last column
 
@@ -66,7 +62,7 @@ class DataLoader:
             raise ValueError("No valid (X, Y) pairs could be created. Check your T, H, and dataset size.")
 
         # ---- Processing Conditions ----
-        
+
         # Case 1: If both `ratio` and `norm` are None → Return X, Y
         if self.norm is None and self.ratio is None:
             return X, Y
@@ -92,4 +88,13 @@ class DataLoader:
             splitter = DataSplitter(X_norm, Y_norm, ratios=self.ratio)
             X_train, Y_train, X_test, Y_test, X_valid, Y_valid = splitter.split()
 
-            return X_train, Y_train, X_test, Y_test, X_valid, Y_valid, self.normalizer.input_params, self.normalizer.output_params
+            return (
+                X_train,
+                Y_train,
+                X_test,
+                Y_test,
+                X_valid,
+                Y_valid,
+                self.normalizer.input_params,
+                self.normalizer.output_params,
+            )

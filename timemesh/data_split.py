@@ -1,5 +1,6 @@
 import numpy as np
 
+
 class DataSplitter:
     def __init__(self, X, Y, ratios):
         self.X = X
@@ -17,22 +18,23 @@ class DataSplitter:
 
     def split(self):
         total_rows = len(self.X)
-        
+
         # Calculate the indices for each set
-        train_end_idx = int(np.floor(total_rows * self.ratios['train'] / 100))
-        test_end_idx = train_end_idx + int(np.floor(total_rows * self.ratios['test'] / 100))
-        
+        train_end_idx = int(np.floor(total_rows * self.ratios["train"] / 100))
+        test_end_idx = train_end_idx + int(np.floor(total_rows * self.ratios["test"] / 100))
+
         # Split data
         X_train = self.X[:train_end_idx]
         Y_train = self.Y[:train_end_idx]
-        
+
         X_test = self.X[train_end_idx:test_end_idx]
         Y_test = self.Y[train_end_idx:test_end_idx]
-        
+
         X_valid = self.X[test_end_idx:]
         Y_valid = self.Y[test_end_idx:]
 
         return X_train, Y_train, X_test, Y_test, X_valid, Y_valid
+
 
 # # Example usage
 # X = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])  # Example data
