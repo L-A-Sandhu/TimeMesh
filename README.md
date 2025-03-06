@@ -29,7 +29,8 @@ loader = tm.DataLoader(
     H=6,   # Predict 6 steps ahead
     input_cols=["temperature", "humidity"],
     output_cols=["target_feature"],
-    norm="MM"  # Min-Max normalization
+    norm="MM"  # Min-Max normalization,
+    ratio={'train': 70, 'test': 15, 'valid': 15}
 )
 
 # Load and preprocess data
@@ -43,6 +44,7 @@ X, Y, input_params, output_params = loader.load_csv("data.csv")
 | **output_cols**| Target features for prediction      | None(All Will be output        | List of column names  |
 | **norm**      | Normalization method                 | `None`(No Normalization)  | `"MM"`, `"Z"`         |
 | **steps**     | Step size between windows            | `None`(Non overlapping)  | Any positive integer  |
+| **ratio**     | Train, Test and Validation Split      | `None`(No Split Just get X and Y or Normalized if normalizing)  | Any positive integer  |
 
 
 
