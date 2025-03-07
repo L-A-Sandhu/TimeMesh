@@ -1,18 +1,41 @@
 # Timemesh 🕰️
 
-[![Python Version](https://img.shields.io/badge/python-3.9%2B-blue)](https://www.python.org/)
 [![PyPI Version](https://img.shields.io/pypi/v/timemesh)](https://pypi.org/project/timemesh/)
+[![Downloads](https://static.pepy.tech/badge/timemesh)](https://pepy.tech/project/timemesh)
 
-A Python library for efficient time series data preprocessing and windowing and split making it easy to process data for machine learning models.
+A Python library for **time series data preprocessing** featuring advanced windowing strategies, normalization, and dataset splitting. Perfect for preparing time-dependent data for LSTM, Transformer, and other sequence models.
 
-## Features
+## 🚀 Key Features for Time Series Machine Learning
 
-- 🚀 **Flexible Windowing**: Create overlapping/non-overlapping windows with configurable time steps (T) and horizon (H)
-- 📊 **Normalization**: Supports Min-Max and Z-score normalization
-- 🔄 **Denormalization**: Revert normalized data to the original scale
-- 🧩 **Modular Design**: Separate data loading and normalization logic
-- ✅ **Validation**: Built-in data integrity checks
-- ✂️ **Train, Validation, Test Split**: Splits data in to desired Train, Test & validation subsets. 
+- ⏳ **Temporal Windowing**: Create overlapping/non-overlapping windows for RNN/LSTM/Transformer models
+- 🔢 **Smart Normalization**: Min-Max & Z-score scaling with automatic denormalization
+- ✂️ **Dataset Splitting**: Time-aware train/validation/test splits for temporal data
+- 🛠️ **Production-Ready**: Built-in data validation & modular pipeline architecture
+- 🔄 **End-to-End Workflow**: From raw CSV to model-ready sequences in 5 lines of code
+
+**Perfect for**: Weather forecasting, stock prediction, IoT sensor analysis, and any time-series forecasting tasks
+
+## 🔍 Why Timemesh vs Other Libraries?
+
+| Feature                | Timemesh | TensorFlow Window | PyTorch DataLoader |
+|------------------------|----------|-------------------|--------------------|
+| Built-in Normalization | ✅       | ❌                | ❌                 |
+| Time-aware Splitting   | ✅       | ❌                | ❌                 |
+| Multi-Output Support   | ✅       | ❌                | Limited            |
+| Denormalization        | ✅       | ❌                | ❌                 |
+| Data Validation        | ✅       | ❌                | ❌                 |
+
+## 🌐 Real-World Use Cases
+
+### ⚡ Energy Demand Forecasting
+```python
+loader = tm.DataLoader(
+    T=168,  # 1 week of hourly data
+    H=24,   # Predict next day's demand
+    norm="Z",
+    ratio={'train': 70, 'test': 15, 'valid': 15}
+)
+```
 
 ## Installation
 
