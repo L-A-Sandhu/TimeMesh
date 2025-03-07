@@ -3,7 +3,7 @@
 [![Python Version](https://img.shields.io/badge/python-3.9%2B-blue)](https://www.python.org/)
 [![PyPI Version](https://img.shields.io/pypi/v/timemesh)](https://pypi.org/project/timemesh/)
 
-A Python library for efficient time series data preprocessing and windowing for machine learning.
+A Python library for efficient time series data preprocessing and windowing and split making it easy to process data for machine learning models.
 
 ## Features
 
