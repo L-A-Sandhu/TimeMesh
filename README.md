@@ -12,7 +12,7 @@ A Python library for efficient time series data preprocessing and windowing and 
 - 🔄 **Denormalization**: Revert normalized data back to original scale
 - 🧩 **Modular Design**: Separate data loading and normalization logic
 - ✅ **Validation**: Built-in data integrity checks
-- ✅ **Train, Validation, Test Split**: Splits data in to designed Train, Test and validation subsets. 
+- ✂️ **Train, Validation, Test Split**: Splits data in to designed Train, Test and validation subsets. 
 
 ## Installation
 
