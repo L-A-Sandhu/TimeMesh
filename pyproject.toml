@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "timemesh"
 version = "0.2.2"
-description = "Spatio-temporal data preparation toolkit"
+description = "Time series preprocessing toolkit: Windowing, normalization & dataset splitting for LSTM/TCN/ConvLSTM/Transformer models, "  
 authors = ["Laeeq <Laeeq.aslam.100@gmail.com>"]
 readme = "README.md"
 license = "MIT"
@@ -9,11 +9,24 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Intended Audience :: Science/Research",  # New classifier
+    "Topic :: Scientific/Engineering :: Information Analysis"  # Additional category
 ]
-keywords = ["time-series", "machine learning", "data preprocessing"]
+keywords = [
+    "time-series", 
+    "machine-learning", 
+    "data-preprocessing",
+    "temporal-windowing",  # Specific to your features
+    "dataset-splitting", 
+    "time-series-normalization", 
+    "lstm-data-preparation",  # Target ML users
+    "transformer-models"
+]
 homepage = "https://github.com/L-A-Sandhu/timemesh"
 repository = "https://github.com/L-A-Sandhu/timemesh"
 documentation = "https://github.com/L-A-Sandhu/timemesh/blob/main/README.md"
+
+# Rest of the file remains EXACTLY THE SAME ▼
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -31,7 +44,6 @@ flake8 = "^7.0.0"
 mypy = "^1.10.0"
 backports-tarfile = "^1.2.0"
 pytest-mock = "^3.14.0"
-
 
 [tool.poetry.scripts]
 timemesh = "timemesh.cli:main"
