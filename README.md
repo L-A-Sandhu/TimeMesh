@@ -9,10 +9,10 @@ A Python library for efficient time series data preprocessing and windowing and 
 
 - 🚀 **Flexible Windowing**: Create overlapping/non-overlapping windows with configurable time steps (T) and horizon (H)
 - 📊 **Normalization**: Supports Min-Max and Z-score normalization
-- 🔄 **Denormalization**: Revert normalized data back to original scale
+- 🔄 **Denormalization**: Revert normalized data to the original scale
 - 🧩 **Modular Design**: Separate data loading and normalization logic
 - ✅ **Validation**: Built-in data integrity checks
-- ✂️ **Train, Validation, Test Split**: Splits data in to designed Train, Test and validation subsets. 
+- ✂️ **Train, Validation, Test Split**: Splits data in to desired Train, Test & validation subsets. 
 
 ## Installation
 
