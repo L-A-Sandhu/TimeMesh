@@ -120,7 +120,7 @@ import pandas as pd
 # =================================================================
 # Load your data for verification
 # =================================================================
-df = pd.read_csv("data.csv")
+
 input_cols = ["C_WD50M", "C_WS50M", "C_PS", "C_T2M", "C_QV2M", "N_WD50M", "N_WS50M", "N_PS", "N_T2M", "N_QV2M"]
 output_cols = ["C_WS50M", "N_WS50M", "S_WS50M", "E_WS50M", "W_WS50M"]
 
